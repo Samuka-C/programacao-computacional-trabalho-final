@@ -15,7 +15,7 @@ enum
 // limpar a tela ou dar um espaco para a proxima operacao
 void clean_console()
 {
-    printf("\e[1;1H\e[2J");
+    system("clear");
 }
 
 // limpar o buffer de entrada do C para evitar erros quando usar o scanf
