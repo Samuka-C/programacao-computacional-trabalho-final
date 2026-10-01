@@ -163,7 +163,7 @@ void subtracao()
     }
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf( MAGENTA "A" NORMAL " - " CYAN "B" NORMAL ":\n\n");
+    printf( MAGENTA "C" NORMAL " - " CYAN "B" NORMAL ":\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
