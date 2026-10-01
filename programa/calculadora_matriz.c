@@ -362,7 +362,7 @@ void main()
 {
     while (1)
     {
-        int n = pedir_op();
+        int n = pedir();
         printf("\n");
 
         switch (n)
