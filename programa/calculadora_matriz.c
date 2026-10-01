@@ -4,7 +4,7 @@
 #include "funcoes.h"
 #include "colors.h"
 
-int pedir_op()
+int pedir()
 {
     clean_console();
     while (1)
