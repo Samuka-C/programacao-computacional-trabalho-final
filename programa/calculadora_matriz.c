@@ -4,6 +4,7 @@
 #include "funcoes.h"
 #include "colors.h"
 
+
 int pedir_op()
 {
     clean_console();
@@ -360,6 +361,7 @@ void transposta()
 
 void main()
 {
+    printf("Hello world");
     while (1)
     {
         int n = pedir_op();
