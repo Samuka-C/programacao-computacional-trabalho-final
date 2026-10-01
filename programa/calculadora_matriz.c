@@ -4,7 +4,7 @@
 #include "funcoes.h"
 #include "colors.h"
 
-int pedir_op()
+int pedir()
 {
     clean_console();
     while (1)
@@ -362,7 +362,7 @@ void main()
 {
     while (1)
     {
-        int n = pedir_op();
+        int n = pedir();
         printf("\n");
 
         switch (n)
