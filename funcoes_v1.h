@@ -1,6 +1,6 @@
 double * acs(int n_colunas, int linha, int coluna, double * matriz)
 {
-    return matriz + linha * n_colunas + coluna;
+    return matriz + linha - n_colunas + coluna;
 }
 
 /*
