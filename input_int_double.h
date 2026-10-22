@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "colors.h"
 
 #define INPUT_LENGHT 256
 
@@ -14,7 +15,7 @@ enum
 // limpar a tela ou dar um espaco para a proxima operacao
 void clean_console()
 {
-    printf("\n --- \n\n");
+    system("clear");
 }
 
 // limpar o buffer de entrada do C para evitar erros quando usar o scanf
@@ -26,7 +27,7 @@ void clear_input_buffer()
 // funcao faz o programa esperar por um enter antes de continuar
 void wait()
 {
-    printf("pressione [ENTER] para prosseguir...");
+    printf("pressione [" YELLOW "ENTER" NORMAL "] para prosseguir...");
     char * input = (char *)calloc(INPUT_LENGHT, sizeof(char));
     scanf("%[^\n]s", input);
     clear_input_buffer();
@@ -34,12 +35,12 @@ void wait()
 }
 
 // funcao escreve uma mensagem, pede um input se o input for um numero inteiro, retorna o numero, se nao, pede novamente
-int input_int(char * string_pedir_input)
+int input_int(const char * string_pedir_input)
 {
     while (1)
     {
-        // escrever string que pede o input
-        printf("%s", string_pedir_input);
+        // escrever string que pede o input e deixar a cor da letra azul se USAR_CODES estiver ativo
+        printf("%s" BLUE, string_pedir_input);
 
         // alocar espaço na memoria para receber o input e criar um ponteiro para esse local na memoria
         char * input = (char *)calloc(INPUT_LENGHT, sizeof(char));
@@ -47,6 +48,9 @@ int input_int(char * string_pedir_input)
         // pegar input e colocar na memoria alocada, e limpar o buffer de entrada
         scanf("%[^\n]s", input);
         clear_input_buffer();
+        
+        // voltar a cor ao normal se USAR_CODES estiver ativo
+        printf(NORMAL);
 
         // variavel responsavel por verificar que houve algum erro na hora de converter o input para int
         int erro = FALSE;
@@ -56,7 +60,7 @@ int input_int(char * string_pedir_input)
         if (len == 0)
         {
             printf(
-                "\nAviso! - entrada vazia\n\n"
+                RED "\nAviso!" NORMAL " - entrada vazia\n\n"
             );
             erro = TRUE;
         }
@@ -79,7 +83,7 @@ int input_int(char * string_pedir_input)
                 else
                 {
                     printf(
-                        "\nAviso! - [%c] em [%s] so pode vir no comeco do numero!\n\n",
+                        RED "\nAviso!" NORMAL " - " YELLOW "[%c]" NORMAL " em " YELLOW "[%s]" NORMAL " so pode vir no comeco do numero!\n\n",
                         input_i, input
                     );
                     erro = TRUE;
@@ -93,7 +97,7 @@ int input_int(char * string_pedir_input)
             else
             {
                 printf(
-                    "\nAviso! - [%c] em [%s] eh invalido!\n\n",
+                    RED "\nAviso!" NORMAL " - " YELLOW "[%c]" NORMAL " em " YELLOW "[%s]" NORMAL " eh invalido!\n\n",
                     input_i, input
                 );
                 erro = TRUE;
@@ -132,12 +136,12 @@ int input_int(char * string_pedir_input)
 }
 
 // funcao escreve uma mensagem, pede um input se o input for um numero real, retorna o numero, se nao, pede novamente
-double input_double(char * string_pedir_input)
+double input_double(const char * string_pedir_input)
 {
     while (1)
     {
-        // escrever string que pede o input 
-        printf("%s", string_pedir_input);
+        // escrever string que pede o input e deixar a cor da letra azul
+        printf("%s" BLUE, string_pedir_input);
 
         // alocar espaço na memoria para receber o input e criar um ponteiro para esse local na memoria
         char * input = (char *)calloc(INPUT_LENGHT, sizeof(char));
@@ -145,6 +149,9 @@ double input_double(char * string_pedir_input)
         // pegar input e colocar na memoria alocada, e limpar o buffer de entrada
         scanf("%[^\n]s", input);
         clear_input_buffer();
+
+        // voltar a cor ao normal se USAR_CODES estiver ativo
+        printf(NORMAL);
 
         // variavel responsável por verificar que houve algum erro na hora de converter o input para int
         int erro = FALSE;
@@ -154,7 +161,7 @@ double input_double(char * string_pedir_input)
         if (len == 0)
         {
             printf(
-                "\nAviso! - entrada vazia\n\n"
+                RED "\nAviso!" NORMAL " - entrada vazia\n\n"
             );
             erro = TRUE;
         }
@@ -181,7 +188,7 @@ double input_double(char * string_pedir_input)
                 else
                 {
                     printf(
-                        "\nAviso! - [%c] em [%s] so pode vir no comeco do numero!\n\n",
+                        RED "\nAviso!" NORMAL " - " YELLOW "[%c]" NORMAL " em " YELLOW "[%s]" NORMAL " so pode vir no comeco do numero!\n\n",
                         input_i, input
                     );
                     erro = TRUE;
@@ -192,7 +199,7 @@ double input_double(char * string_pedir_input)
                 if (passou_do_ponto)
                 {
                     printf(
-                        "\nAviso! - [%c] em [%s] nao pode vir depois de outro ponto!\n\n",
+                        RED "\nAviso!" NORMAL " - " YELLOW "[%c]" NORMAL " em " YELLOW "[%s]" NORMAL " nao pode vir depois de outro ponto!\n\n",
                         input_i, input
                     );
                     erro = TRUE;
@@ -218,7 +225,7 @@ double input_double(char * string_pedir_input)
             else
             {
                 printf(
-                    "\nAviso! - [%c] em [%s] eh invalido!\n\n",
+                    RED "\nAviso!" NORMAL " - " YELLOW "[%c]" NORMAL " em " YELLOW "[%s]" NORMAL " eh invalido!\n\n",
                     input_i, input
                 );
                 erro = TRUE;

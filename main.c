@@ -2,24 +2,26 @@
 #include <stdlib.h>
 #include "input_output_matriz.h"
 #include "funcoes.h"
+#include "colors.h"
 
 // funcao que pergunta ao usuario qual operacao realizar
 int pedir_op()
 {
+    clean_console();
     while (1)
     {
         // pedir input do usuario
         printf(
             "CALCULADORA DE MATRIZES\n"
             "operacoes possiveis:\n"
-            "1 - adicao\n"
-            "2 - subtracao\n"
-            "3 - produto escalar\n"
-            "4 - produto entre matrizes\n"
-            "5 - calculo de determinante\n"
-            "6 - inversa\n"
-            "7 - transposta\n"
-            "8 - sair\n" 
+            BLUE "1" NORMAL " - adicao\n"
+            BLUE "2" NORMAL " - subtracao\n"
+            BLUE "3" NORMAL " - produto escalar\n"
+            BLUE "4" NORMAL " - produto entre matrizes\n"
+            BLUE "5" NORMAL " - calculo de determinante\n"
+            BLUE "6" NORMAL " - inversa\n"
+            BLUE "7" NORMAL " - transposta\n"
+            BLUE "8" NORMAL" - " RED "sair" NORMAL "\n" 
         );
         int n = input_int("operacao desejada: ");
 
@@ -32,9 +34,10 @@ int pedir_op()
         {
             clean_console();
             printf(
-                "\nAviso! - input [%d] eh invalido!\n"
+                RED "\nAviso!" NORMAL
+                " - input " YELLOW "[%d]" NORMAL " eh invalido!\n"
                 "as opcoes de entrada possiveis sao:\n"
-                "1, 2, 3, 4, 5, 6, 7, 8\n\n",
+                BLUE "1, 2, 3, 4, 5, 6, 7, 8\n\n" NORMAL,
                 n
             );
         }
@@ -52,16 +55,16 @@ void adicao()
     // while usado para pedir novos dados de entrada caso os dados de entrada sejam incopativeis com a operacao
     while (1)
     {
-        printf("A + B\n\n");
+        printf( MAGENTA "A" NORMAL " + " CYAN "B" NORMAL "\n\n");
 
         // pedir o tamanho das matrizes A e B
         int n_linhas_1, n_colunas_1;
-        printf("tamanho de A:\n");
+        printf("tamanho de " MAGENTA "A" NORMAL ":\n");
         input_matriz_size(&n_linhas_1, &n_colunas_1);
         printf("\n");
 
         int n_linhas_2, n_colunas_2;
-        printf("tamanho de B:\n");
+        printf("tamanho de " CYAN "B" NORMAL ":\n");
         input_matriz_size(&n_linhas_2, &n_colunas_2);
         printf("\n");
 
@@ -69,7 +72,7 @@ void adicao()
         // matrizes tem que ser do mesmo tamanho
         if (n_linhas_1 != n_linhas_2 || n_colunas_1 != n_colunas_2)
         {
-            printf("Aviso! - matrizes A e B devem ter o mesmo tamanho!\n");
+            printf( RED "Aviso!" NORMAL " - matrizes " MAGENTA "A" NORMAL " e " CYAN "B" NORMAL " devem ter o mesmo tamanho!\n");
         }
         else
         {
@@ -80,12 +83,12 @@ void adicao()
 
             // criar espaco para matriz A e B e pedir os elementos para ambas
             double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-            printf("A:\n");
+            printf( MAGENTA "A" NORMAL ":\n");
             input_matriz(n_linhas_1, n_colunas_1, matriz_1);
             printf("\n");
 
             double * matriz_2 = (double *)calloc(n_linhas_2 * n_colunas_2, sizeof(double));
-            printf("B:\n");
+            printf( CYAN "B" NORMAL ":\n");
             input_matriz(n_linhas_2, n_colunas_2, matriz_2);
             printf("\n");
 
@@ -98,7 +101,7 @@ void adicao()
     }
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("A + B:\n\n");
+    printf( MAGENTA "A" NORMAL " + " CYAN "B" NORMAL ":\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
@@ -114,16 +117,16 @@ void subtracao()
     // while usado para pedir novos dados de entrada caso os dados de entrada sejam incopativeis com a operacao
     while (1)
     {
-        printf("A - B\n\n");
+        printf( MAGENTA "A" NORMAL " - " CYAN "B" NORMAL "\n\n");
 
         // pedir o tamanho das matrizes A e B
         int n_linhas_1, n_colunas_1;
-        printf("tamanho de A:\n");
+        printf("tamanho de " MAGENTA "A" NORMAL ":\n");
         input_matriz_size(&n_linhas_1, &n_colunas_1);
         printf("\n");
 
         int n_linhas_2, n_colunas_2;
-        printf("tamanho de B:\n");
+        printf("tamanho de " CYAN "B" NORMAL ":\n");
         input_matriz_size(&n_linhas_2, &n_colunas_2);
         printf("\n");
 
@@ -131,7 +134,7 @@ void subtracao()
         // matrizes tem que ser do mesmo tamanho
         if (n_linhas_1 != n_linhas_2 || n_colunas_1 != n_colunas_2)
         {
-            printf("Aviso! - matrizes A e B devem ter o mesmo tamanho!\n");
+            printf( RED "Aviso!" NORMAL " - matrizes " MAGENTA "A" NORMAL " e " CYAN "B" NORMAL " devem ter o mesmo tamanho!\n");
         }
         else
         {
@@ -142,12 +145,12 @@ void subtracao()
 
             // criar espaco para matriz A e B e pedir os elementos para ambas
             double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-            printf("A:\n");
+            printf( MAGENTA "A" NORMAL ":\n");
             input_matriz(n_linhas_1, n_colunas_1, matriz_1);
             printf("\n");
 
             double * matriz_2 = (double *)calloc(n_linhas_2 * n_colunas_2, sizeof(double));
-            printf("B:\n");
+            printf( CYAN "B" NORMAL ":\n");
             input_matriz(n_linhas_2, n_colunas_2, matriz_2);
             printf("\n");
 
@@ -160,7 +163,7 @@ void subtracao()
     }
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("A - B:\n\n");
+    printf( MAGENTA "A" NORMAL " - " CYAN "B" NORMAL ":\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
@@ -176,16 +179,16 @@ void produto_entre_matrizes()
     // while usado para pedir novos dados de entrada caso os dados de entrada sejam incopativeis com a operacao
     while (1)
     {
-        printf("A x B\n\n");
+        printf( MAGENTA "A" NORMAL " x " CYAN "B" NORMAL "\n\n");
 
         // pedir o tamanho das matrizes A e B
         int n_linhas_1, n_colunas_1;
-        printf("tamanho de A:\n");
+        printf("tamanho de " MAGENTA "A" NORMAL ":\n");
         input_matriz_size(&n_linhas_1, &n_colunas_1);
         printf("\n");
 
         int n_linhas_2, n_colunas_2;
-        printf("tamanho de B:\n");
+        printf("tamanho de " CYAN "B" NORMAL ":\n");
         input_matriz_size(&n_linhas_2, &n_colunas_2);
         printf("\n");
 
@@ -193,7 +196,7 @@ void produto_entre_matrizes()
         // numero de colunas da primeira tem que ser igual ao numero de linhas da segunda
         if (n_colunas_1 != n_linhas_2)
         {
-            printf("Aviso! - numero de colunas de A deve ser igual ao numero de linhas de B!\n");
+            printf( RED "Aviso!" NORMAL " - numero de colunas de " MAGENTA "A" NORMAL " deve ser igual ao numero de linhas de " CYAN "B" NORMAL "!\n");
         }
         else
         {
@@ -204,12 +207,12 @@ void produto_entre_matrizes()
 
             // criar espaco para matriz A e B e pedir os elementos para ambas
             double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-            printf("A:\n");
+            printf( MAGENTA "A" NORMAL ":\n");
             input_matriz(n_linhas_1, n_colunas_1, matriz_1);
             printf("\n");
 
             double * matriz_2 = (double *)calloc(n_linhas_2 * n_colunas_2, sizeof(double));
-            printf("B:\n");
+            printf( CYAN "B" NORMAL ":\n");
             input_matriz(n_linhas_2, n_colunas_2, matriz_2);
             printf("\n");
 
@@ -222,7 +225,7 @@ void produto_entre_matrizes()
     }
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("A x B:\n\n");
+    printf( MAGENTA "A" NORMAL " x " CYAN "B" NORMAL ":\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
@@ -237,11 +240,11 @@ void calculo_determinante()
     // while usado para pedir novos dados de entrada caso os dados de entrada sejam incopativeis com a operacao
     while (1)
     {
-        printf( "det(" "A)\n\n");
+        printf("det(%sA%s)\n\n", MAGENTA, NORMAL);
 
         // pedir o tamanho da matriz A
         int n_linhas_1, n_colunas_1;
-        printf("tamanho de A:\n");
+        printf("tamanho de %sA%s:\n", MAGENTA, NORMAL);
         input_matriz_size(&n_linhas_1, &n_colunas_1);
         printf("\n");
 
@@ -249,13 +252,13 @@ void calculo_determinante()
         // matriz tem que ser quadrada
         if (n_linhas_1 != n_colunas_1)
         {
-            printf("Aviso! - A deve ser uma matriz quadrada!\n");
+            printf( RED "Aviso!" NORMAL " - " MAGENTA "A" NORMAL " deve ser uma matriz quadrada!\n");
         }
         else
         {
             // criar espaco para matriz A e pedir os elementos para ela
             double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-            printf("A:\n");
+            printf( MAGENTA "A" NORMAL ":\n");
             input_matriz(n_linhas_1, n_colunas_1, matriz_1);
             printf("\n");
 
@@ -267,7 +270,7 @@ void calculo_determinante()
     }
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("det(A) = %.2lf\n\n", determinante);
+    printf("det(" MAGENTA "A" NORMAL ") = %.2lf\n\n", determinante);
     wait();
 }
 
@@ -282,11 +285,11 @@ void inversa()
     // while usado para pedir novos dados de entrada caso os dados de entrada sejam incopativeis com a operacao
     while (1)
     {
-        printf("A^-1\n\n");
+        printf( MAGENTA "A" NORMAL "^-1\n\n");
 
         // pedir o tamanho da matriz A
         int n_linhas_1, n_colunas_1;
-        printf("tamanho de A:\n");
+        printf("tamanho de " MAGENTA "A" NORMAL ":\n");
         input_matriz_size(&n_linhas_1, &n_colunas_1);
         printf("\n");
 
@@ -294,7 +297,7 @@ void inversa()
         // matriz tem que ser quadrada
         if (n_linhas_1 != n_colunas_1)
         {
-            printf("Aviso! - A deve ser uma matriz quadrada!\n");
+            printf( RED "Aviso!" NORMAL " - " MAGENTA "A" NORMAL " deve ser uma matriz quadrada!\n");
         }
         else
         {
@@ -305,7 +308,7 @@ void inversa()
 
             // criar espaco para matriz A e pedir os elementos para ela
             double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-            printf("A:\n");
+            printf( MAGENTA "A" NORMAL ":\n");
             input_matriz(n_linhas_1, n_colunas_1, matriz_1);
             printf("\n");
 
@@ -319,13 +322,13 @@ void inversa()
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
     if (inversivel)
     {
-        printf("A^-1:\n\n");
+        printf( MAGENTA "A" NORMAL "^-1:\n\n");
         output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     }
     else
     {
-        // se nao puder ser invertida a funcao deixa claro e segue  sem mostrar uma matriz como resultado
-        printf("a matriz A nao pode ser invertida!");
+        // se nao puder ser invertida a funcao deixa claro e segue normal sem mostrar uma matriz como resultado
+        printf("a matriz " MAGENTA "A" NORMAL " nao pode ser invertida!");
     }
     free(matriz_resultado);
     printf("\n");
@@ -338,11 +341,11 @@ void produto_escalar()
     int n_linhas_r, n_colunas_r;
     double * matriz_resultado;
 
-    printf("A * n\n\n");
+    printf( MAGENTA "A" NORMAL " * " CYAN "n" NORMAL "\n\n");
 
     // pedir o tamanho da matriz A
     int n_linhas_1, n_colunas_1;
-    printf("tamanho de A:\n");
+    printf("tamanho de " MAGENTA "A" NORMAL ":\n");
     input_matriz_size(&n_linhas_1, &n_colunas_1);
     printf("\n");
 
@@ -353,11 +356,11 @@ void produto_escalar()
 
     // criar espaco para matriz A e pedir os elementos para ela
     double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-    printf("A:\n");
+    printf( MAGENTA "A" NORMAL ":\n");
     input_matriz(n_linhas_1, n_colunas_1, matriz_1);
     printf("\n");
 
-    double escalar = input_double( "n: ");
+    double escalar = input_double(CYAN "n" NORMAL ": ");
     printf("\n");
 
     // realizar opercao usando funcao do funcoes.h e liberar espaco dedicado as matrizes input
@@ -365,7 +368,7 @@ void produto_escalar()
     free(matriz_1);
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("A * n:\n\n");
+    printf( MAGENTA "A" NORMAL " * " CYAN "n" NORMAL ":\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
@@ -378,11 +381,11 @@ void transposta()
     int n_linhas_r, n_colunas_r;
     double * matriz_resultado;
 
-    printf("A^t\n\n");
+    printf( MAGENTA "A" NORMAL "^t\n\n");
 
     // pedir o tamanho da matriz A
     int n_linhas_1, n_colunas_1;
-    printf("tamanho de A:\n");
+    printf("tamanho de " MAGENTA "A" NORMAL ":\n");
     input_matriz_size(&n_linhas_1, &n_colunas_1);
     printf("\n");
 
@@ -393,7 +396,7 @@ void transposta()
 
     // criar espaco para matriz A e pedir os elementos para ela
     double * matriz_1 = (double *)calloc(n_linhas_1 * n_colunas_1, sizeof(double));
-    printf("A:\n");
+    printf( MAGENTA "A" NORMAL ":\n");
     input_matriz(n_linhas_1, n_colunas_1, matriz_1);
     printf("\n");
 
@@ -402,14 +405,14 @@ void transposta()
     free(matriz_1);
 
     // escrever resultado, liberar espaco dedicado a matriz resultado, e esperar o usuario para sair da funcao
-    printf("A^t:\n\n");
+    printf( MAGENTA "A" NORMAL "^t:\n\n");
     output_matriz(n_linhas_r, n_colunas_r, matriz_resultado);
     free(matriz_resultado);
     printf("\n");
     wait();
 }
 
-void main()
+int main()
 {
     // loop infinito até o usuario selecionar para sair
     while (1)
@@ -445,9 +448,9 @@ void main()
         case 8:
             // a "opercao" 8 faz a funcao main parar atravez do return;
             printf("obrigado por usar a CALCULADORA DE MATRIZES <3\n\n");
-            return;
+            return 0;
         }
-        
-        clean_console();
     }
+
+    return 0;
 }
